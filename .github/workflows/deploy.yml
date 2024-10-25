@@ -10,23 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Updated to the latest version
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4  # Updated to the latest version
       with:
         python-version: '3.9'
     
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
-        pip install python-dotenv
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Install all dependencies from requirements.txt
+        pip install python-dotenv  # Install dotenv for environment variable management
     
     - name: Run tests
       run: |
-        pytest
-    
+        pytest  # Run tests using pytest
+
     - name: Login to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
